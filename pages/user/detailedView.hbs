@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body class="vh-100 ">
+    {{!-- navbar --}}
+    <nav class="navbar navbar-expand-lg navbar-light  " style="background-color: #291c9b;">
+        <div class="container mr-0">
+            <a class="navbar-brand fs-2 text-white fw-bold " href="#">JASARTEC</a>
+
+            <button class="navbar-toggler  shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {{!-- side bar --}}
+
+            <div class="sidebar offcanvas offcanvas-end  " tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+
+                {{!-- sidebar header --}}
+
+                <div class="offcanvas-header text-white border-bottem  " style="background-color: #291c9b;">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">JASARTEC </h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body   just" style="background-color: #291c9b;">
+                    <ul class="navbar-nav justify-content-end align-items-center flex-grow-1 pe-3 ">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" href="#about">About</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" href="#about">contact</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" href="#about">Blogs</a>
+                        </li>
+
+                    </ul>
+                     <div class=" m-1 p-1 text-white border border-white">{{userDetails.first_name}}</div>
+                    <div class="d-flex flex-column flex-lg-row justify-content-centeralign-items-center gap-3 mt-1">
+                     
+                            
+                            <button class="text-white text-decoration-none px-3 py-1 rounded-4 btn-success " type="submit">Log Out</button>
+                       
+                         
+                    </div>
+                   
+                    {{!-- <div>
+                        {{userDetails.email}}*****
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section>
+
+        
+    <script src="/script.js"></script>
+</body>
+</html>
