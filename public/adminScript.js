@@ -1,3 +1,6 @@
+// const { application, json } = require("express")
+
+const { response } = require("express")
 
 
 const  showImages =()=>{
@@ -12,4 +15,21 @@ const  showImages =()=>{
         image.style.margin="3px"
         imagePreview.appendChild(image)
     }
+}
+
+function deletePost(postId){
+fetch('/admin/deletePost',{
+    method:'delete',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify({postId:postId})
+}).then((response)=>{
+    if(response.delete){
+        location.reload()
+    }else{
+        alert('somthing went wrong')
+    }
+
+})
 }

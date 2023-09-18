@@ -4,6 +4,7 @@ const BLOGS=require('../models/blogSchema')
 const jwt = require('jsonwebtoken')
 const { users } = require('../models/userModel')
 const { response } = require('express')
+const multer = require("multer");
 
 
 
@@ -23,7 +24,6 @@ const showSignup =(req,res)=>{
 
 
 const doSignup=(req,res)=>{
-  console.log(req.body);
 
   USER({
     
@@ -48,7 +48,7 @@ const doLogin=(req,res)=>{
   USER.find({email:req.body.email,password:req.body.password}).then((response)=>{
     if(response.length>0){
 
-      const token = jwt.sign({userId:response[0]._id},"secretkey",{
+      const token = jwt.sign({userId:response[0]._id},process.env.JWT_KEY,{
         expiresIn:'2d'
       })
       res.cookie('userJwt',token,{
@@ -70,12 +70,62 @@ const getHomepage=(req,res)=>{
 }
 
 const detailedView=(req,res)=>{
-  console.log(req.query);
-  BLOGS.find({_id:req.query.id}).then(response=>{
+  try{
+    
+    
+  BLOGS.find({_id:req.query.id}).populate({
+    path:'createdBy',
+    select:['name','email']})
+    .then(response=>{
+
+    // response[0].createdAt=new Date(response[0].createdAt).getDay()
     console.log(response);
     res.render('user/detailedView.hbs',{data:res[0]})
   })
+  .catch(err=>{
+    res.send('error')
+  })
+
+  }catch(err){
+    
+  res.send("handled in catch")
+  }
+  finally{
+    console.log("hai");
+  }
+
+
+    
+  }
  
+
+const createBlog=(req,res)=>{
+  res.render('user/upload.hbs')
+}
+const addBlogData=(req,res)=>{
+  console.log(req.query,'*******');
+  const fileStorage=multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,"user/uploads");
+    },
+    filename:(req,files,cb)=>{
+        cb(null,Date.now()+"-"+files.originalname)
+    }
+})
+const upload=multer({storage:fileStorage}).array("images",4)
+upload(req,res,(err)=>{
+    BLOGS({heading:req.body.catagory,
+    content:req.body.content,
+    
+    images:req.files,
+    createdBy:req.query.id
+
+
+
+    }).save().then(response=>{
+        res.redirect('/createBlog')
+    })
+  })
 }
 
 const logout=(req,res)=>{
@@ -88,4 +138,4 @@ const logout=(req,res)=>{
  req.cookies.userJwt=null
  res.redirect('/')
 }
-module.exports={doSignup,loginPage,showSignup,doLogin,getHomepage,detailedView,logout}
+module.exports={doSignup,loginPage,showSignup,doLogin,getHomepage,detailedView,logout,createBlog,addBlogData}

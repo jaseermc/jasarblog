@@ -4,6 +4,7 @@ const path=require('path')
 const hbs = require('hbs')
 const connectDB=require('./config/dbConfig')
 const cookieParser=require('cookie-parser')
+require('dotenv').config()
 
 const admin=require('./routes/admin')
 const user=require('./routes/user')
@@ -28,4 +29,4 @@ app.use('/admin',admin)
 
 
 
-app.listen(3003)
+app.listen(process.env.PORT)

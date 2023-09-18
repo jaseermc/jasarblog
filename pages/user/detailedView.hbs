@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,12 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
+
 <body class="vh-100 ">
     {{!-- navbar --}}
     <nav class="navbar navbar-expand-lg navbar-light  " style="background-color: #291c9b;">
         <div class="container mr-0">
-            <a class="navbar-brand fs-2 text-white fw-bold " href="#">JASARTEC</a>
+            <a class="navbar-brand fs-2 text-white fw-bold " href="#">JASARBLOG</a>
 
             <button class="navbar-toggler  shadow-none border-0" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -30,7 +32,8 @@
 
                 <div class="offcanvas-header text-white border-bottem  " style="background-color: #291c9b;">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">JASARTEC </h5>
-                    <button type="button" class="btn-close btn-close-white shadow-none " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white shadow-none " data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body   just" style="background-color: #291c9b;">
                     <ul class="navbar-nav justify-content-end align-items-center flex-grow-1 pe-3 ">
@@ -48,25 +51,83 @@
                         </li>
 
                     </ul>
-                     <div class=" m-1 p-1 text-white border border-white">{{userDetails.first_name}}</div>
+                    <div class=" m-1 p-1 text-white border border-white">{{userDetails.first_name}}</div>
                     <div class="d-flex flex-column flex-lg-row justify-content-centeralign-items-center gap-3 mt-1">
-                     
-                            
-                            <button class="text-white text-decoration-none px-3 py-1 rounded-4 btn-success " type="submit">Log Out</button>
-                       
-                         
+
+
+                        <button class="text-white text-decoration-none px-3 py-1 rounded-4 btn-success "
+                            type="submit">Log Out</button>
+
+
                     </div>
-                   
+
                     {{!-- <div>
                         {{userDetails.email}}*****
                     </div> --}}
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> 
+    <h2>{{data.heading}}</h2>
+    <p>{{data.createdBy}}</p>
+
     <section>
 
-        
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                {{#if data.image.[0].filename}}
+                <div class="carousel-item active">
+                    <img src="/uploads/{{data.images.[0].filename}}" class="d-block w-100" style="height: 600px;" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{data.heading}}</h5>
+                        <p>{{data.content}}</p>
+                    </div>
+                </div>
+                {{/if}}
+
+                 {{#if data.image.[1].filename}}
+                <div class="carousel-item">
+                    <img src="/uploads/{{data.images.[0].filename}}" class="d-block w-100" style="height: 600px;" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{data.heading}}</h5>
+                        <p>{{data.content}}</p>
+                    </div>
+                </div>
+                  {{/if}}
+
+                   {{#if data.image.[1].filename}}
+                <div class="carousel-item">
+                    <img src="/uploads/{{data.images.[0].filename}}" class="d-block w-100" style="height: 600px;" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{data.heading}}</h5>
+                        <p>{{data.content}}</p>
+                    </div>
+                </div>
+                       {{/if}}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+
     <script src="/script.js"></script>
 </body>
+
 </html>
